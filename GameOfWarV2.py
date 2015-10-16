@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-GameOfWar.py
+GameOfWarV2.py
 
 __author__ = "Daniel"
 
@@ -51,11 +51,9 @@ def playRound(PlayerA, PlayerB):
 	if aRank > bRank:
 		# A wins
 		PlayerA.insert(0,aCard)
-		PlayerB.insert(0,bCard)
 	elif aRank < bRank:
 		# B wins
 		PlayerB.insert(0,bCard)
-		PlayerA.insert(0,aCard)
 	else:
 		PlayerA, PlayerB = WAR(PlayerA,PlayerB)
 	

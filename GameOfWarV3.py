@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
+
 """
-GameOfWar.py
+GameOfWarV3.py
 
 __author__ = "Daniel"
 
@@ -36,7 +37,7 @@ def main():
 	while len(PlayerAHand) > 0 and len(PlayerBHand) > 0:
 		gameCounter += 1
 		PlayerAHand, PlayerBHand = playRound(PlayerAHand, PlayerBHand)
-		if gameCounter == 1000:
+		if gameCounter > 1000:
 			print("Draw")
 			break
 	# End of game
@@ -51,11 +52,9 @@ def playRound(PlayerA, PlayerB):
 	if aRank > bRank:
 		# A wins
 		PlayerA.insert(0,aCard)
-		PlayerB.insert(0,bCard)
 	elif aRank < bRank:
 		# B wins
 		PlayerB.insert(0,bCard)
-		PlayerA.insert(0,aCard)
 	else:
 		PlayerA, PlayerB = WAR(PlayerA,PlayerB)
 	
@@ -63,9 +62,22 @@ def playRound(PlayerA, PlayerB):
 
 
 def WAR(PlayerA, PlayerB):
-	# See the README.md file for instructions on coding 
-	# This module.
-
+	if len(PlayerA) > 5 and len(PlayerB) > 5:
+		PlayerAHand = []
+		PlayerBHand = []
+		for d in range(5):
+			PlayerAHand.append(PlayerA.pop())
+			PlayerBHand.append(PlayerB.pop())
+		if getRank(PlayerAHand[4]) > getRank(PlayerBHand[4]):
+			PlayerA = PlayerAHand + PlayerBHand + PlayerA
+		elif getRank(PlayerAHand[4]) < getRank(PlayerBHand[4]):
+			PlayerA = PlayerAHand + PlayerBHand + PlayerB
+		else:
+			PlayerA, PlayerB = Loser(PlayerA, PlayerB)
+	return PlayerA, PlayerB
+	
+def Loser(PlayerA, PlayerB):
+	# Lose Cards
 	return PlayerA, PlayerB
 
 	
